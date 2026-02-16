@@ -1,0 +1,144 @@
+[
+    // --- BAR PERTAMA (TOP) ---
+    {
+        "name": "topbar",
+        "layer": "top",
+        "position": "top",
+        "height": 26,
+        "margin-top": 5,
+        "margin-right": 5,
+        "margin-left": 5,
+        "margin-bottom": 5,
+        "exclusive": false,
+
+        "modules-left": ["hyprland/workspaces"],
+        "modules-center": ["group/media-control"],
+        "modules-right": ["clock"],
+
+
+        "hyprland/workspaces": {
+            "format": "{icon}",
+            "on-click": "activate",
+            "sort-by-number": true,
+            "persistent-workspaces": {
+                "*": [1, 2, 3, 4, 5]
+            }
+        },
+   
+
+
+        "hyprland/window": {
+            "max-length": 50,
+            "separate-outputs": true
+        },
+
+        // --- CENTER: MEDIA CONTROL (VLC & Music) ---
+        "group/media-control": {
+            "orientation": "horizontal",
+            "modules": [
+                "custom/media-icon",
+                "mpris",
+                "custom/media-prev",
+                "custom/media-play",
+                "custom/media-next"
+            ]
+        },
+
+            "mpris": {
+                "format": "{artist} - {title}",
+                "max-length": 50
+            },
+            "custom/media-icon": { "format": "  ", "tooltip": false },
+            "custom/media-prev": { "format": " 󰒮", "on-click": "playerctl previous", "tooltip": false },
+            "custom/media-play": { "format": "", "on-click": "playerctl play-pause", "tooltip": false },
+            "custom/media-next": { "format": "󰼧", "on-click": "playerctl next", "tooltip": false },
+        "clock": {
+            "format": "{:%H:%M}",
+            "tooltip-format": "<tt>{:%A,%d-%m-%Y}</tt>",
+            "calendar": {
+                "mode": "month",
+                "mode-mon-col": 3,
+                "on-scroll": 1,
+                "format": {
+                    "months": "<span color='#00ffff'><b>{}</b></span>",
+                    "days": "<span color='#ffffff'>{}</span>",
+                    "weekdays": "<span color='#bb9af7'><b>{}</b></span>",
+                    "today": "<span color='#f5c2e7'><b><u>{}</u></b></span>"
+                }
+            },
+            "actions": {
+                "on-click-right": "mode",
+                "on-scroll-up": "shift_up",
+                "on-scroll-down": "shift_down"
+            }
+        }
+    },    
+
+
+// --- BAR KEDUA (LEFT) ---
+    {
+        "name": "leftbar",
+        "layer": "top",
+        "position": "left",
+        "width": 30,
+        "height": 1080,
+        "margin-top": 0,
+        "margin-right": 0,
+        "margin-left": 0,
+        "margin-bottom":0, 
+        "exclusive": true,
+        "gtk-layer-shell": true,
+
+        "modules-left": ["custom/launcher"],  
+        "modules-center": ["custom/browser", "custom/code", "custom/terminal", "custom/files", "custom/waypaper"],
+        "modules-right": ["custom/audio", "custom/powermenu"],
+
+        "custom/launcher": {
+            "format": "󰍜",
+            "on-click": "wofi --show drun",
+            "tooltip": false
+        },
+
+        "custom/browser": {
+            "format": "󰈹",
+            "on-click": "hyprctl dispatch exec zen-browser",
+            "tooltip": false
+        },
+
+        "custom/code": {
+            "format": "",
+            "on-click": "hyprctl dispatch exec code",
+            "tooltip": false
+        },
+
+        "custom/terminal": {
+            "format": "",
+            "on-click": "hyprctl dispatch exec kitty",
+            "tooltip": false
+        },
+        
+        "custom/files": {
+            "format": "",
+            "on-click": "thunar",
+            "tooltip": false
+        },
+
+        "custom/waypaper": {
+            "format": "󰸉",
+            "on-click": "hyprctl dispatch exec waypaper",
+            "tooltip": false
+        },
+            
+        "custom/audio": {
+            "format": "󰕾",
+            "on-click": "hyprctl dispatch exec pavucontrol",
+            "tooltip": false
+        },
+
+        "custom/powermenu": {
+            "format": "󰗽",
+            "on-click": "hyprctl dispatch exec wlogout",
+            "tooltip": false
+        }
+    }
+]

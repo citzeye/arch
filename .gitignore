@@ -1,0 +1,11 @@
+# Cache & Junk
+ZenBrowser/
+google-chrome/
+discord/
+microsoft-edge/
+PulseAudio/
+session/
+Trash/
+*cache*
+*.log
+*.tmp

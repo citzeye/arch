@@ -1,0 +1,141 @@
+window#waybar {
+  background: transparent;
+  font-family: "Kode Mono";
+  font-size: 12px;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  background: transparent;
+  padding: 0px;
+  margin: 0px;
+}
+
+#workspaces {
+  padding: 0px 0px 0px 0px;
+}
+
+#workspaces button {
+  background: transparent;
+  color: #505050;
+  padding: 0px 4px;
+}
+
+#workspaces button:hover {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.907);
+  border: none;
+  box-shadow: none;
+}
+
+#workspaces button.active {
+  color: rgba(255, 255, 255, 0.907);
+}
+
+#media-control {
+  padding: 0px 8px;
+}
+
+#custom-media-icon {
+  color:  rgba(255, 255, 255, 0.907);
+  padding-right: 5px;
+}
+
+#mpris {
+  color: #aaaaaa;
+  font-size: 12px;
+}
+
+#custom-media-play {
+  color: rgba(121, 121, 121, 0.8);
+  padding: 0 10px;
+}
+
+#custom-media-prev,
+#custom-media-next {
+  color: rgba(121, 121, 121, 0.8);
+  font-size: 15px;
+  padding: 0 5px;
+}
+
+#clock {
+  color: rgba(255, 255, 255, 0.907);
+  font-weight: bold;
+  padding: 0px 8px;
+  margin-left: 8px;
+}
+
+#workspaces,
+#media-control,
+#clock {
+  border-radius: 4px;
+  background: #1B1B1B;
+}
+
+#clock:hover {
+  color: rgba(255, 255, 255, 0.907);
+}
+
+/* --- BAR KEDUA (LEFT) --- */
+
+window#waybar.leftbar {
+  background-color: #1B1B1B;
+}
+
+window#waybar.leftbar > box {
+  background-color: transparent;
+}
+
+window#waybar.leftbar .modules-left,
+window#waybar.leftbar .modules-center,
+window#waybar.leftbar .modules-right {
+  font-family: "3270 Nerd Font";
+  min-width: 30px;
+  background-color: transparent;
+  padding: 5px 5px 0px 2px
+}
+
+window#waybar.leftbar #custom-launcher,
+window#waybar.leftbar #custom-browser,
+window#waybar.leftbar #custom-code,
+window#waybar.leftbar #custom-terminal,
+window#waybar.leftbar #custom-files,
+window#waybar.leftbar #custom-waypaper,
+window#waybar.leftbar #custom-audio,
+window#waybar.leftbar #custom-powermenu {
+  color: rgba(138, 109, 218, 0.885);
+}
+
+window#waybar.leftbar #custom-launcher {
+  font-size: 22px;
+  padding: 5px 5px 0px 2px;
+}
+
+window#waybar.leftbar #custom-browser,
+window#waybar.leftbar #custom-code,
+window#waybar.leftbar #custom-terminal,
+window#waybar.leftbar #custom-files,
+window#waybar.leftbar #custom-waypaper {
+  font-size: 20px;
+  padding: 5px 5px 0px 0px;
+}
+
+window#waybar.leftbar #custom-audio,
+window#waybar.leftbar #custom-powermenu {
+  font-size: 20px;
+  padding: 0px 3px 5px 0px;
+}
+
+window#waybar.leftbar #custom-launcher:hover,
+window#waybar.leftbar #custom-browser:hover,
+window#waybar.leftbar #custom-files:hover,
+window#waybar.leftbar #custom-code:hover,
+window#waybar.leftbar #custom-terminal:hover,
+window#waybar.leftbar #custom-waypaper:hover,
+window#waybar.leftbar #custom-audio:hover,
+window#waybar.leftbar #custom-powermenu:hover {
+  color: rgba(255, 255, 255, 0.907);
+}
+
+/*# sourceMappingURL=style.css.map */
