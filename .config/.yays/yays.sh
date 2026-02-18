@@ -12,8 +12,6 @@ fi
 AUR_APPS=(
     "bibata-cursor-theme-bin"
     "udevil-git"
-    "waypaper"
-    "wlogout"
     "zen-browser-bin"
 )
 

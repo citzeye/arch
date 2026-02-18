@@ -2,7 +2,7 @@
 Type=Application
 Name=Micro Editor
 Comment=Terminal Text Editor
-# Perintah ini nyuruh Kitty buat buka dan langsung jalanin micro
+
 Exec=kitty -e micro %F
 Icon=text-editor
 Terminal=false
