@@ -1,4 +1,4 @@
-🐧 Arch Linux Dotfiles - citzeye
+🐧 Arch Linux Dotfiles - Loonix
 
 Welcome to my configuration repository! This repo contains my personal Arch Linux dotfiles, crafted with a focus on clean aesthetics and a fast, efficient workflow.
 
@@ -7,9 +7,9 @@ Welcome to my configuration repository! This repo contains my personal Arch Linu
  - Terminal: Kitty
  - Shell: Zsh
  - File Manager: Thunar
- - Editor: Micro / VS Code
- - Bootloader Limine
- - login page sddm
+ - Text Editor: Micro
+ - Bootloader: Limine
+ - login page: sddm
 
 
 
@@ -29,9 +29,8 @@ If you're feeling brave (use at your own risk!), simply clone and copy the confi
 > Test your connection with : ping google.com" (press 'ctrl+c' to stop
 > ping)
 >
-> REMEMBER : MASTER config playground in ~/loonix/.config.
-> ```deploy```
-> use alias deploy after edit your config
+> IMPORTANT : MASTER config playground in ```~/loonix/.config```
+> Always use aliase ```deploy``` after edit to send all your config into the right position.
 
 
 
@@ -55,7 +54,7 @@ If you're feeling brave (use at your own risk!), simply clone and copy the confi
 | Screen | Print | Screenshot Fullscreen |
 | Workspc | Alt + [1-5] | Switch Workspace |
 | Workspc | Super + [1-5] | Move Window to Workspace |
-| Workspc | Alt + Tab | Next Workspace |
+| Workspc | Alt + Tab | Next Workspace - Loop |
 
 
 

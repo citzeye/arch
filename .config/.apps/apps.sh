@@ -4,7 +4,7 @@ echo "--- Installing Comprehensive App List ---"
 
 # 1. Install Apps via Pacman
 APPS=(
-    "hyprland" "xdg-desktop-portal-hyprland" "uwsm"
+    "limine" "sddm" "hyprland" "xdg-desktop-portal-hyprland" "uwsm"
     "kitty" "wofi" "waybar" "dunst" "libnotify"
     "micro" "thunar" "thunar-archive-plugin" "gvfs"
     "zoxide" "eza" "zsh" "htop" "fastfetch"
