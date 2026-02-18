@@ -30,3 +30,4 @@ text/javascript=micro-editor.desktop;
 application/x-shellscript=micro-editor.desktop;kitty.desktop;
 application/x-zerosize=micro-editor.desktop;
 text/css=micro-editor.desktop;
+text/markdown=micro-editor.desktop;

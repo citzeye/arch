@@ -6,6 +6,7 @@ Welcome to my configuration repository! This repo contains my personal Arch Linu
  - WM: Hyprland (Wayland)
  - Terminal: Kitty
  - Shell: Zsh
+ - Browser: Brave
  - File Manager: Thunar
  - Text Editor: Micro
  - Bootloader: Limine
