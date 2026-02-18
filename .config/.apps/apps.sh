@@ -32,20 +32,13 @@ sleep 2 # Give user time to read the suggestion
 echo "--- Installing Comprehensive App List ---"
 
 # 1. Install Apps via Pacman
-# Added some missing essentials like 'mesa' for basic rendering
 APPS=(
-    "limine" "sddm" "hyprland" "xdg-desktop-portal-hyprland" "uwsm"
-    "kitty" "wofi" "dunst" "libnotify"
-    "micro" "thunar" "thunar-archive-plugin" "gvfs"
-    "zoxide" "eza" "zsh" "btop" "fastfetch"
-    "grim" "slurp" "cliphist" "wl-clipboard"
-    "polkit-kde-agent" "network-manager-applet"
-    "ttf-nerd-fonts-symbols" "fontconfig"
-    "nwg-look" "hyprshot" "hyprpaper" "hypridle" "hyprlock"
-    "qt5-wayland" "qt6-wayland" "qt5ct"
-    "zsh-autosuggestions"
-    "zsh-syntax-highlighting"
-    "mesa" "ufw"# Added for basic OpenGL support on all GPUs
+    "limine" "sddm" "hyprland" "xdg-desktop-portal-hyprland" "uwsm" "kitty" "wofi" "dunst" "libnotify"
+    "micro" "thunar" "thunar-archive-plugin" "gvfs" "zoxide" "eza" "zsh" "btop" "fastfetch"
+    "grim" "slurp" "cliphist" "wl-clipboard" "polkit-kde-agent" "network-manager-applet"
+    "ttf-nerd-fonts-symbols" "fontconfig" "nwg-look" "hyprshot" "hyprpaper" "hypridle" "hyprlock"
+    "qt5-wayland" "qt6-wayland" "qt5ct" "zsh-autosuggestions" "zsh-syntax-highlighting" "mesa" "ufw"
+    "gjs" "upower" "adwaita-icon-theme"
 )
 
 sudo pacman -S --needed "${APPS[@]}" --noconfirm
