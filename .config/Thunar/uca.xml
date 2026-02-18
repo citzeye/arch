@@ -2,26 +2,13 @@
 <actions>
 <action>
 	<icon>utilities-terminal</icon>
-	<name>Open Terminal Here</name>
+	<name>Open Kitty Here</name>
 	<submenu></submenu>
-	<unique-id>1771231985760150-1</unique-id>
-	<command>exo-open --working-directory %f --launch kitty</command>
-	<description>Example for a custom action</description>
+	<unique-id>1708250000000000-1</unique-id>
+	<command>kitty --directory %f</command>
+	<description>Open Kitty terminal in this directory</description>
 	<range></range>
 	<patterns>*</patterns>
-	<startup-notify/>
 	<directories/>
-</action>
-<action>
-	<icon></icon>
-	<name>Open in Micro</name>
-	<submenu></submenu>
-	<unique-id>1771234371933319-1</unique-id>
-	<command>kitty -e micro %f</command>
-	<description></description>
-	<range>*</range>
-	<patterns>*</patterns>
-	<other-files/>
-	<text-files/>
 </action>
 </actions>

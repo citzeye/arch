@@ -8,8 +8,8 @@ export VISUAL='micro'
 export ZSH="$HOME/.oh-my-zsh"
 
 # --- 2. Oh My Zsh Setup (Urutan jangan ditukar!) ---
-#ZSH_THEME="robbyrussell"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="robbyrussell"
+#ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git)
 
 # Load Oh My Zsh (Taruh paling bawah setelah theme & plugins)
@@ -69,7 +69,13 @@ mkd() { mkdir -p "$@" && cd "$_"; }
 # Source plugins dari pacman
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
 # =========================================================
 #  END OF CONFIG
 # =========================================================
+
+# Alias untuk deploy (sebar barang dari loonix ke sistem)
+alias deploy='~/loonix/deploy.sh'
+# Alias untuk push (push folder loonix ke github)
+alias gogit='cd ~/loonix && git add . && git commit -m "update" && git push && cd -'
