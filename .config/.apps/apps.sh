@@ -38,7 +38,7 @@ APPS=(
     "grim" "slurp" "cliphist" "wl-clipboard" "polkit-kde-agent" "network-manager-applet"
     "ttf-nerd-fonts-symbols" "fontconfig" "nwg-look" "hyprshot" "hyprpaper" "hypridle" "hyprlock"
     "qt5-wayland" "qt6-wayland" "qt5ct" "zsh-autosuggestions" "zsh-syntax-highlighting" "mesa" "ufw"
-    "gjs" "upower" "adwaita-icon-theme"
+    "upower" "adwaita-icon-theme" "libpulse" "rsync" "playerctl" "mpris" "gtk3" "gtk4"
 )
 
 sudo pacman -S --needed "${APPS[@]}" --noconfirm

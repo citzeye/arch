@@ -1,31 +1,31 @@
 #!/bin/bash
 
-# --- 1. Bootstrapping Yay (Already solid) ---
+# --- 1. Bootstrapping Yay ---
 if ! command -v yay &> /dev/null; then
+    echo "Yay not found. Installing now..."
     sudo pacman -S --needed base-devel git --noconfirm
-    git clone https://aur.archlinux.org/yay.git
-    pushd yay > /dev/null
+    # Using /tmp so it doesn't clutter your loonix folder
+    git clone https://aur.archlinux.org/yay.git /tmp/yay
+    pushd /tmp/yay > /dev/null
     makepkg -si --noconfirm
     popd > /dev/null
-    rm -rf yay
+    rm -rf /tmp/yay
 fi
 
 # --- 2. Defining AUR Packages ---
 AUR_APPS=(
     "bibata-cursor-theme-bin"
-    "udevil-git"
-    "brave-browser-bin"
-    "aylurs-gtk-shell"      # The main AGS shell
-    "gtk-layer-shell"       # Required for bar positioning in Wayland
-    "brightnessctl"         # For screen brightness control widgets
+        "brave-browser-bin"
+        "brightnessctl"
+        # "gtk-layer-shell"  # Uncomment kalo pake waybar, comment kalo ga pake waybar 
 )
 
 # --- 3. Execution ---
 if [ "$1" == "install" ]; then
-    echo "--- Installing AUR Packages ---"
-    # Added gjs & upower via pacman first since they are in official repos
-    # This speeds up the process before compiling AGS
-    sudo pacman -S --needed gjs upower adwaita-icon-theme --noconfirm
+    echo "--- Installing AUR Packages for Loonix ---"
+    
+    # We removed the sudo pacman -S part from here 
+    # because it's already handled by your apps.sh
     
     yay -S --needed "${AUR_APPS[@]}" --noconfirm
 fi

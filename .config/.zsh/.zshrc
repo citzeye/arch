@@ -6,6 +6,10 @@
 export EDITOR='micro'
 export VISUAL='micro'
 
+# Fix untuk AGS dan aplikasi GTK
+export XDG_RUNTIME_DIR=/run/user/$UID
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # --- 2. Simple Prompt Setup ---
 PROMPT='%F{cyan}%n@%m%f >
 '
@@ -48,7 +52,7 @@ alias crules='micro ~/loonix/.config/hypr/configs/rules.conf'
 alias ckit='micro ~/loonix/.config/kitty/kitty.conf'
 alias cway='micro ~/loonix/.config/waybar/config.jsonc'
 alias cwaycss='micro ~/loonix/.config/waybar/style.css'
-alias czsh='micro ~/loonix/.config/.zsh/.zshrc' # Edit master zshrc
+alias czsh='micro ~/loonix/.config/.zsh/.zshrc'
 alias rzsh='source ~/.zshrc && echo "🚀 Zsh Config Reloaded!"'
 alias nuke='source ~/.zshrc && ~/.local/bin/r-all.sh && echo "Reload all config DONE!"'
 alias dsync='cd ~/loonix && ./deploy.sh && cd -'
@@ -68,6 +72,7 @@ mkd() { mkdir -p "$@" && cd "$_"; }
 # --- 10. Plugins (Arch Linux Path) ---
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+
 
 # =========================================================
 #  END OF CONFIG

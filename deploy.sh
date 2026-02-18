@@ -1,27 +1,54 @@
 #!/bin/bash
 
-# Ensure rsync is installed
-if ! command -v rsync &> /dev/null; then
-    echo "❌ Error: rsync is not installed. Install it with: sudo pacman -S rsync"
-    exit 1
-fi
+# --- Loonix Deployment Script: The "Don't Make Me Repeat Myself" Edition ---
 
-echo "🚀 Deploying configs from loonix to system..."
+# Master source from your playground
+SOURCE="$HOME/loonix/.config"
+TARGET="$HOME/.config"
 
-# 1. Sync folder .config standar (Hypr, Kitty, Waybar, dll)
-rsync -av --exclude '.git/' ~/loonix/.config/ ~/.config/
+echo "🚀 Deploying Loonix: Transforming your system into a hall of mirrors..."
 
-# 2. FIX UNTUK THUNAR (Deploy .desktop files)
-# File dari ~/loonix/.config/.desktops/ harus ke ~/.local/share/applications/
+# 1. THE MASS LINKING (The .config folders)
+for item in "$SOURCE"/{.*,*}; do
+    # Skip the annoying '.' and '..' directories
+    [[ "$(basename "$item")" == "." || "$(basename "$item")" == ".." ]] && continue
+    
+    # Define the destination name
+    dest_name=$(basename "$item")
+    target_path="$TARGET/$dest_name"
+
+    # Kill the existing folder/link before it starts nesting like a Russian doll
+    rm -rf "$target_path"
+    
+    # Create the magic link
+    ln -sfn "$item" "$target_path"
+    echo "🔗 Linked: $dest_name -> Master Playground"
+done
+
+
+# THUNAR DESKTOP FIX (Because Thunar is picky)
 mkdir -p ~/.local/share/applications
-cp ~/loonix/.config/.desktops/*.desktop ~/.local/share/applications/ 2>/dev/null
+echo "📂 Linking desktop shortcuts... (So you don't have to use the terminal for EVERYTHING)"
+for desktop_file in "$SOURCE"/.desktops/*.desktop; do
+    [ -e "$desktop_file" ] || continue
+    ln -sfn "$desktop_file" ~/.local/share/applications/"$(basename "$desktop_file")"
+done
 
-# 3. DEPLOY BINARIES
-# File dari ~/loonix/.config/.locals/bin/ harus ke ~/.local/bin/
+# BINARY DEPLOYMENT (The "I am Speed" section)
 mkdir -p ~/.local/bin
-cp -r ~/loonix/.config/.locals/bin/* ~/.local/bin/ 2>/dev/null
+echo "⚡ Linking custom binaries... (Your future self will thank you)"
+for bin_file in "$SOURCE"/.locals/bin/*; do
+    [ -e "$bin_file" ] || continue
+    ln -sfn "$bin_file" ~/.local/bin/"$(basename "$bin_file")"
+done
 
-# 4. DEPLOY ZSHRC
-cp ~/loonix/.config/.zsh/.zshrc ~/.zshrc
+# ZSHRC (The Holy Grail)
+echo "🐚 Linking .zshrc... (Making your terminal look like you're hacking NASA)"
+ln -sfn "$SOURCE"/.zsh/.zshrc ~/.zshrc
 
-echo "✅ Success! Semua config, file desktop, dan binary telah dideploy."
+# THE NUKE (Closing the quote and adding -i for alias support)
+zsh -ci "nuke"
+
+echo ""
+echo "✅ Success! Your system is now officially a 'Loonix' puppet."
+echo "💡 Pro tip: If you edit files in ~/loonix, the system updates INSTANTLY. No more copy-paste!"
