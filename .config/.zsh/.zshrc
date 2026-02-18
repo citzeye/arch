@@ -34,7 +34,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 
 # --- 6. Aliases: Hyprland Configs (Target: Loonix Folder) ---
-alias ch='micro ~/loonix/.config/hypr/hyprland.conf'
+alias chypr='micro ~/loonix/.config/hypr/hyprland.conf'
 alias ccolors='micro ~/loonix/.config/hypr/colors.conf'
 alias cidle='micro ~/loonix/.config/hypr/hypridle.conf'
 alias clock='micro ~/loonix/.config/hypr/hyprlock.conf'
