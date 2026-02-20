@@ -4,59 +4,63 @@
 # LOONIX INSTALLER (ROOT VERSION)
 # =========================================================
 
+# --- Identifikasi ---
+USER_NOW=$(whoami)
+IS_DEV=false
+[[ "$USER_NOW" == "citz" ]] && IS_DEV=true
+
 echo "--- Starting Full Installation: Loonix Project ---"
 
-# 1. Pastikan folder essential di Home sudah ada
+# 1. Essential Folders
 mkdir -p "$HOME/Documents"
 mkdir -p "$HOME/Pictures/Screenshots"
+mkdir -p "$HOME/.config"
 
-# 2. Kasih izin eksekusi ke semua script di folder scripts/
-# Kita tembak relatif dari posisi loonix.sh berada
+# 2. Permissions
 chmod +x ./.config/scripts/*.sh
 
-# Priority list (Nama file tanpa .sh)
-PRIORITY=("apps" "yays")
-
-# 3. Jalankan Script Priority
+# 3. Priority Run (Apps & Drivers)
+PRIORITY=("apps")
 for p in "${PRIORITY[@]}"; do
     script_file="./.config/scripts/$p.sh"
-    if [ -f "$script_file" ]; then
-        echo "🚀 Priority Run: $p.sh"
-        bash "$script_file" install
+    [ -f "$script_file" ] && bash "$script_file" install
+done
+
+# 4. CONFIG DEPLOYMENT (Symlink vs Copy)
+echo "🔗 Deploying Configurations..."
+DOTS_DIR="$(pwd)/.config"
+TARGET_DIR="$HOME/.config"
+
+for folder in "$DOTS_DIR"/*/; do
+    folder_name=$(basename "$folder")
+    
+    # Filter folder internal
+    [[ "$folder_name" == "apps" || "$folder_name" == "scripts" ]] && continue
+
+    if [ "$IS_DEV" = true ]; then
+        # Buat Lo: Symlink (Path Absolut)
+        ln -sf "$(pwd)/.config/$folder_name" "$TARGET_DIR/"
+        echo "   [DEV] Symlinked $folder_name"
+    else
+        # Buat User: Copy (Permanen)
+        cp -r "$folder" "$TARGET_DIR/"
+        echo "   [USER] Installed $folder_name"
     fi
 done
 
-# 4. Jalankan Sisa Script di folder scripts/
+# 5. Sisa Script
 for script in ./.config/scripts/*.sh; do
     filename=$(basename "$script")
-    
-    # Jangan jalankan lagi yang sudah masuk Priority, 
-    # dan jangan jalankan script utility seperti r-all atau deploy secara acak
-    if [[ " ${PRIORITY[*]} " =~ " ${filename%.sh} " ]] || \
-       [[ "$filename" == "deploy.sh" ]] || \
-       [[ "$filename" == "r-all.sh" ]]; then
-        continue
-    fi
-
-    echo "🚀 Running: $filename"
+    [[ " ${PRIORITY[*]} " =~ " ${filename%.sh} " || "$filename" == "deploy.sh" || "$filename" == "r-all.sh" ]] && continue
     bash "$script" install
 done
 
-# 5. Jalankan Deploy (Biar semua folder ter-link ke $HOME/.config)
-if [ -f "./.config/scripts/deploy.sh" ]; then
-    echo "🔗 Linking configurations..."
-    bash "./.config/scripts/deploy.sh"
-fi
-
 # 6. Refresh Zsh
-# Gunakan zsh -c karena source nggak bisa jalan langsung dari bash script
 zsh -c "source ~/.zshrc"
-
-echo "--- 🧹 Final Cleanup ---"
-# Opsi hapus script (aktifkan jika untuk ISO sekali pakai)
-# find ./.config/scripts/ -type f -name "*.sh" ! -name "deploy.sh" ! -name "r-all.sh" -delete
 
 echo "--- 🎉 Loonix Installation Finished! ---"
 
-# Self-destruct installer yang ada di root ini
-rm -- "$0"
+# 7. Self-Destruct (Hanya untuk User/Cloner)
+if [ "$IS_DEV" = false ]; then
+    rm -- "$0"
+fi
