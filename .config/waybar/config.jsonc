@@ -91,43 +91,51 @@
 
         "modules-left": ["custom/launcher"],  
         "modules-center": ["custom/browser", "custom/code", "custom/terminal", "custom/files", "custom/waypaper"],
-        "modules-right": ["custom/audio", "custom/powermenu"],
-
-        "custom/launcher": {
-            "format": "󰍜",
-            "on-click": "wofi --show drun",
-            "tooltip": false
-        },
-
-        "custom/browser": {
-            "format": "󰈹",
-            "on-click": "hyprctl dispatch exec zen-browser",
-            "tooltip": false
-        },
-
-        "custom/code": {
-            "format": "",
-            "on-click": "hyprctl dispatch exec code",
-            "tooltip": false
-        },
-
-        "custom/terminal": {
-            "format": "",
-            "on-click": "hyprctl dispatch exec kitty",
-            "tooltip": false
-        },
+                "modules-right": ["custom/audio", "custom/powermenu"],
         
-        "custom/files": {
-            "format": "",
-            "on-click": "thunar",
-            "tooltip": false
-        },
-
-        "custom/waypaper": {
-            "format": "󰸉",
-            "on-click": "hyprctl dispatch exec waypaper",
-            "tooltip": false
-        },
+                "custom/launcher": {
+                    "format": "󰍜",
+                    "on-click": "wofi --show drun",
+                    "tooltip": false
+                },
+        
+                "custom/browser": {
+                    "format": "{}",
+                    "interval": 2,
+                    "exec": "if pgrep -x brave > /dev/null; then echo '<span color=\"#fb5416\">󰈹</span>'; else echo '󰈹'; fi",
+                    "on-click": "brave --password-store=basic",
+                    "tooltip": false
+                },
+        
+                "custom/code": {
+                    "format": "{}",
+                    "interval": 2,
+                    "exec": "if pgrep -x code > /dev/null; then echo '<span color=\"#007acc\"></span>'; else echo ''; fi",
+                    "on-click": "hyprctl dispatch exec code",
+                    "tooltip": false
+                },
+        
+                "custom/terminal": {
+                    "format": "{}",
+                    "interval": 2,
+                    "exec": "if pgrep -x kitty > /dev/null; then echo '<span color=\"#4dff71\"></span>'; else echo ''; fi",
+                    "on-click": "hyprctl dispatch exec kitty",
+                    "tooltip": false
+                },
+                
+                "custom/files": {
+                    "format": "{}",
+                    "interval": 2,
+                    "exec": "if pgrep -x thunar > /dev/null; then echo '<span color=\"#f9f06b\"></span>'; else echo ''; fi",
+                    "on-click": "hyprctl dispatch exec thunar",
+                    "tooltip": false
+                },
+        
+                "custom/waypaper": {
+                    "format": "󰸉",
+                    "on-click": "hyprctl dispatch exec waypaper",
+                    "tooltip": false
+                },
             
         "custom/audio": {
             "format": "󰕾",
