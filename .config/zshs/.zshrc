@@ -9,6 +9,7 @@ export VISUAL='micro'
 # Fix untuk AGS dan aplikasi GTK
 export XDG_RUNTIME_DIR=/run/user/$UID
 export XDG_CONFIG_HOME="$HOME/.config"
+export PATH="$HOME/.config/scripts:$HOME/.config/locals/bin:$PATH"
 
 # --- 2. Simple Prompt Setup ---
 PROMPT='%F{cyan}%n@%m%f >
@@ -34,6 +35,7 @@ compinit -i
 # --- 5. Aliases: Navigation ---
 alias z='cd'
 alias c='cd ~/loonix/.config'
+alias l='cd ~/loonix'
 alias ..='cd ..'
 alias ...='cd ../..'
 
@@ -55,11 +57,11 @@ alias crules='micro ~/loonix/.config/hypr/configs/rules.conf'
 alias ckit='micro ~/loonix/.config/kitty/kitty.conf'
 alias cway='micro ~/loonix/.config/waybar/config.jsonc'
 alias cwaycss='micro ~/loonix/.config/waybar/style.css'
-alias czsh='micro ~/loonix/.config/.zsh/.zshrc'
+alias czsh='micro ~/loonix/.config/zshs/.zshrc'
 alias rzsh='source ~/.zshrc && echo "🚀 Zsh Config Reloaded!"'
-alias nuke='source ~/.zshrc && ~/.local/bin/r-all.sh && echo "Reload all config DONE!"'
-alias dsync='cd ~/loonix && ./deploy.sh && cd -'
-alias deploy='~/loonix/deploy.sh'
+alias nuke='source ~/.zshrc && ~/.config/locals/scripts/r-all.sh && echo "Reload all config DONE!"'
+alias dsync='cd ~/loonix && ./scripts/deploy.sh && cd -'
+alias deploy='~/loonix/.config/scripts/deploy.sh'
 alias gogit='cd ~/loonix && git add . && git commit -m "update" && git push && cd -'
 
 # --- 8. Aliases: Package Manager ---
@@ -75,8 +77,6 @@ mkd() { mkdir -p "$@" && cd "$_"; }
 # --- 10. Plugins (Arch Linux Path) ---
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-
-
 
 # =========================================================
 #  END OF CONFIG

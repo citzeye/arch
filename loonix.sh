@@ -1,61 +1,62 @@
 #!/bin/bash
 
 # =========================================================
-# LOONIX INSTALLER (FINAL VERSION)
+# LOONIX INSTALLER (ROOT VERSION)
 # =========================================================
 
-echo "--- Starting Full Installation ---"
+echo "--- Starting Full Installation: Loonix Project ---"
 
-# 1. Ensure essential local bin directory exists
-mkdir -p "$HOME/.local/bin"
+# 1. Pastikan folder essential di Home sudah ada
 mkdir -p "$HOME/Documents"
 mkdir -p "$HOME/Pictures/Screenshots"
 
-# 2. Set execute permission for all scripts inside .config
-find ./.config -type f -name "*.sh" -exec chmod +x {} +
+# 2. Kasih izin eksekusi ke semua script di folder scripts/
+# Kita tembak relatif dari posisi loonix.sh berada
+chmod +x ./.config/scripts/*.sh
 
-# Priority scripts to run first
+# Priority list (Nama file tanpa .sh)
 PRIORITY=("apps" "yays")
 
-# 3. Run Priority Scripts
-for folder in "${PRIORITY[@]}"; do
-    script_file=$(find "./.config/.$folder" -name "*.sh" 2>/dev/null)
+# 3. Jalankan Script Priority
+for p in "${PRIORITY[@]}"; do
+    script_file="./.config/scripts/$p.sh"
     if [ -f "$script_file" ]; then
-        echo "🚀 Priority Run: $script_file"
-        pushd "$(dirname "$script_file")" > /dev/null
-        ./$(basename "$script_file") install
-        popd > /dev/null
+        echo "🚀 Priority Run: $p.sh"
+        bash "$script_file" install
     fi
 done
 
-# 4. Run Remaining Scripts in .config subfolders
-find ./.config -mindepth 2 -name "*.sh" | while read -r script; do
-    is_priority=false
-    for p in "${PRIORITY[@]}"; do
-        if [[ "$script" == *"/.${p}/"* ]]; then
-            is_priority=true
-            break
-        fi
-    done
-
-    if [ "$is_priority" = false ]; then
-        echo "🚀 Running: $script"
-        pushd "$(dirname "$script")" > /dev/null
-        ./$(basename "$script") install
-        popd > /dev/null
+# 4. Jalankan Sisa Script di folder scripts/
+for script in ./.config/scripts/*.sh; do
+    filename=$(basename "$script")
+    
+    # Jangan jalankan lagi yang sudah masuk Priority, 
+    # dan jangan jalankan script utility seperti r-all atau deploy secara acak
+    if [[ " ${PRIORITY[*]} " =~ " ${filename%.sh} " ]] || \
+       [[ "$filename" == "deploy.sh" ]] || \
+       [[ "$filename" == "r-all.sh" ]]; then
+        continue
     fi
+
+    echo "🚀 Running: $filename"
+    bash "$script" install
 done
 
-# 5. Refresh shell configuration
-source ~/.zshrc
+# 5. Jalankan Deploy (Biar semua folder ter-link ke $HOME/.config)
+if [ -f "./.config/scripts/deploy.sh" ]; then
+    echo "🔗 Linking configurations..."
+    bash "./.config/scripts/deploy.sh"
+fi
+
+# 6. Refresh Zsh
+# Gunakan zsh -c karena source nggak bisa jalan langsung dari bash script
+zsh -c "source ~/.zshrc"
 
 echo "--- 🧹 Final Cleanup ---"
+# Opsi hapus script (aktifkan jika untuk ISO sekali pakai)
+# find ./.config/scripts/ -type f -name "*.sh" ! -name "deploy.sh" ! -name "r-all.sh" -delete
 
-# Delete all .sh files inside hidden folders in .config
-# EXCEPT for deploy.sh and r-all.sh (Safety Filter)
-find ./.config -maxdepth 3 -type f -name "*.sh" ! -name "deploy.sh" ! -name "r-all.sh" -delete
+echo "--- 🎉 Loonix Installation Finished! ---"
 
-echo "--- 🎉 Done ---"
-
-# 6. Self-destruct this installer
+# Self-destruct installer yang ada di root ini
 rm -- "$0"

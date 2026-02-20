@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 1. Reload config Waypaper
-pkill swww-daemon && swww-daemon & 
+waypaper --restore 
 
 # 2. Reload config Bar & Notif
 pkill waybar; waybar &

@@ -9,15 +9,13 @@ TARGET="$HOME/.config"
 echo "🚀 Deploying Loonix: Transforming your system into a hall of mirrors..."
 
 # 1. THE MASS LINKING (The .config folders)
-for item in "$SOURCE"/{.*,*}; do
-    # Skip the annoying '.' and '..' directories
-    [[ "$(basename "$item")" == "." || "$(basename "$item")" == ".." ]] && continue
-    
+# Kita pakai * aja karena sekarang Bre udah nggak pakai titik untuk folder buatan sendiri
+for item in "$SOURCE"/*; do
     # Define the destination name
     dest_name=$(basename "$item")
     target_path="$TARGET/$dest_name"
 
-    # Kill the existing folder/link before it starts nesting like a Russian doll
+    # Kill the existing folder/link
     rm -rf "$target_path"
     
     # Create the magic link
@@ -25,30 +23,28 @@ for item in "$SOURCE"/{.*,*}; do
     echo "🔗 Linked: $dest_name -> Master Playground"
 done
 
-
-# THUNAR DESKTOP FIX (Because Thunar is picky)
+# 2. DESKTOP FIX (Update path ke 'desktops' tanpa titik)
 mkdir -p ~/.local/share/applications
-echo "📂 Linking desktop shortcuts... (So you don't have to use the terminal for EVERYTHING)"
-for desktop_file in "$SOURCE"/.desktops/*.desktop; do
+echo "📂 Linking desktop shortcuts..."
+for desktop_file in "$SOURCE"/desktops/*.desktop; do
     [ -e "$desktop_file" ] || continue
     ln -sfn "$desktop_file" ~/.local/share/applications/"$(basename "$desktop_file")"
 done
 
-# BINARY DEPLOYMENT (The "I am Speed" section)
+# 3. BINARY DEPLOYMENT (Update path ke 'locals' tanpa titik)
 mkdir -p ~/.local/bin
-echo "⚡ Linking custom binaries... (Your future self will thank you)"
-for bin_file in "$SOURCE"/.locals/bin/*; do
+echo "⚡ Linking custom binaries..."
+for bin_file in "$SOURCE"/locals/bin/*; do
     [ -e "$bin_file" ] || continue
     ln -sfn "$bin_file" ~/.local/bin/"$(basename "$bin_file")"
 done
 
-# ZSHRC (The Holy Grail)
-echo "🐚 Linking .zshrc... (Making your terminal look like you're hacking NASA)"
-ln -sfn "$SOURCE"/.zsh/.zshrc ~/.zshrc
+# 4. ZSHRC (Update path ke 'zshs' dan pastikan ~/.zshrc nembak ke sana)
+echo "🐚 Linking .zshrc..."
+ln -sfn "$SOURCE"/zshs/.zshrc ~/.zshrc
 
-# THE NUKE (Closing the quote and adding -i for alias support)
+# THE NUKE (Reload all config)
 zsh -ci "nuke"
 
 echo ""
 echo "✅ Success! Your system is now officially a 'Loonix' puppet."
-echo "💡 Pro tip: If you edit files in ~/loonix, the system updates INSTANTLY. No more copy-paste!"
