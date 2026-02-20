@@ -1,12 +1,27 @@
-# Cache & Junk
-ZenBrowser/
-google-chrome/
-discord/
-microsoft-edge/
-PulseAudio/
-session/
-Trash/
+# --- Loonix Junk Filter ---
+
+# Browser Profiles (Data Pribadi)
+.config/BraveSoftware/
+.config/google-chrome/
+
+# Editor Profiles & Junk (Berat)
+.config/Code\ -\ OSS/
+.config/Code/
+.config/Visual\ Studio\ Code/
+
+# System Junk
+.config/pulse/
+.config/pavucontrol.ini
+.config/dconf/
+.config/session/
+.config/Trash/
+
+# Apps Folder (Mentahan .pkg.tar.zst lo biar gak masuk git)
+.config/apps/
+
+# Extension/File Patterns
 *cache*
+*Cache*
 *.log
 *.tmp
-.config/gh/
+*.zst
