@@ -36,6 +36,7 @@ compinit -i
 alias z='cd'
 alias c='cd ~/loonix/.config'
 alias l='cd ~/loonix'
+alias s='cd ~/loonix/.config/scripts'
 alias ..='cd ..'
 alias ...='cd ../..'
 
@@ -58,9 +59,9 @@ alias ckit='micro ~/loonix/.config/kitty/kitty.conf'
 alias cway='micro ~/loonix/.config/waybar/config.jsonc'
 alias cwaycss='micro ~/loonix/.config/waybar/style.css'
 alias czsh='micro ~/loonix/.config/zshs/.zshrc'
-alias rzsh='source ~/loonix/.config/zshs/.zshrc && echo "🚀 Zsh Config Reloaded!"'
-alias nuke='source ~/loonix/.config/zshs/.zshrc && ~/loonix/.config/scripts/r-all.sh && echo "Reload all config DONE!"'
-#alias deploy='~/loonix/.config/scripts/deploy.sh'
+alias rzsh='source ~/.zshrc && echo "🚀 Zsh Config Reloaded!"'
+alias nuke='~/loonix/.config/scripts/r-all.sh && echo "Reload all config DONE!'
+
 alias gogit='cd ~/loonix && git add . && git commit -m "update" && git push && cd -'
 
 # --- 8. Aliases: Package Manager ---
