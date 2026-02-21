@@ -8,6 +8,10 @@
 .config/Code\ -\ OSS/
 .config/Code/
 .config/Visual\ Studio\ Code/
+.vscode/extensions/
+.config/Code/CachedData/
+.config/Code/Logs/
+.config/Code/Backups/
 
 # System Junk
 .config/pulse/
