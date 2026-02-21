@@ -79,12 +79,13 @@ window#waybar {
 window#waybar.leftbar {
 	font-family: "3270 Nerd Font Mono";
 	background-color: #1B1B1B;
+  min-width: 26px;
 }
 
 window#waybar.leftbar > box {
 	background-color: transparent;
-	min-width: 30px;
-	padding: 0px 0px 0px 8px;
+	min-width: 26px;
+	padding: 0px 0px 0px 0px;
 }
 
 window#waybar.leftbar .modules-left,
@@ -92,7 +93,7 @@ window#waybar.leftbar .modules-center,
 window#waybar.leftbar .modules-right {
   min-width: 26px;
   background-color: transparent;
-  padding: 0px 5px 0px 2px
+  padding: 0px 0px 0px 2px
 }
 
 window#waybar.leftbar #custom-launcher,
@@ -108,7 +109,7 @@ window#waybar.leftbar #custom-powermenu {
 }
 
 window#waybar.leftbar #custom-launcher {
-  padding: 5px 5px 0px 2px;
+  padding: 5px 0px 0px 0px;
 }
 
 window#waybar.leftbar #custom-browser,
@@ -116,12 +117,12 @@ window#waybar.leftbar #custom-code,
 window#waybar.leftbar #custom-terminal,
 window#waybar.leftbar #custom-files,
 window#waybar.leftbar #custom-wp {
-  padding: 5px 5px 0px 0px;
+  padding: 5px 0px 0px 0px;
 }
 
 window#waybar.leftbar #custom-audio,
 window#waybar.leftbar #custom-powermenu {
-  padding: 0px 3px 5px 0px;
+  padding: 0px 0px 5px 0px;
 }
 
 window#waybar.leftbar #custom-launcher:hover,

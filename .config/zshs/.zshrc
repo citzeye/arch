@@ -2,6 +2,26 @@
 #  ZSH CONFIGURATION (LOONIX MASTER)
 # =========================================================
 
+# --- 0.loonix boot Sequence ---
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+  # 1. Jalankan Loonix-Login di dalam Cage (Wayland Kiosk)
+  # Ganti path-nya ke binary/script loonix-login lo
+  cage ~/loonix/tools/loonix-login/bin/loonix-login
+
+  # 2. Begitu Cage/Loonix-Login ditutup, baru tembak Hyprland
+  exec Hyprland
+fi
+
+# --- Loonix Boot Sequence ---
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+  # 1. Jalankan Loonix-Login di dalam Cage (Wayland Kiosk)
+  # Ganti path-nya ke binary/script loonix-login lo
+  cage ~/loonix/tools/loonix-login/bin/loonix-login
+
+  # 2. Begitu Cage/Loonix-Login ditutup, baru tembak Hyprland
+  exec Hyprland
+fi
+
 # --- 1. Environment Variables ---
 export EDITOR='micro'
 export VISUAL='micro'
@@ -100,8 +120,11 @@ mkd() { mkdir -p "$@" && cd "$_"; }
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
-# --- 11. Custom Functions ---
-
+# --- 11. ByPass Login ---
+# --- Auto Start Hyprland dari TTY1 ---
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+  exec Hyprland
+fi
 # =========================================================
 eval "$(zoxide init zsh)"
 #  END OF CONFIG
