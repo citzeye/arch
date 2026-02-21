@@ -11,8 +11,26 @@ export XDG_RUNTIME_DIR=/run/user/$UID
 export PATH="$HOME/.config/scripts:$HOME/.config/locals/bin:$PATH"
 
 # --- 2. Simple Prompt Setup ---
-PROMPT='%F{cyan}%n@%m%f >
-'
+#PROMPT='%F{cyan}%n@%m%f >
+#'
+
+# Not simple prompt
+get_breadcrumb() {
+  local path_str="${PWD/#$HOME/󰋜 }"
+  # Filter supaya kalau di root atau awal gak double pipe
+  local formatted="${path_str//\// | }"
+  echo "${formatted} |"
+}
+
+setopt prompt_subst
+
+# GANTI INI: Pakai double quotes agar variabel lari saat shell mulai
+# Dan kita pakai precmd supaya dia update SETIAP KALI lo enter/pindah folder
+set_prompt() {
+    PROMPT="%F{blue}%n@%m%f | %F{cyan}$(get_breadcrumb)%f %F{green}>%f
+"
+}
+precmd_functions+=(set_prompt)
 
 # --- Cursor Setup (Underline) ---
 _set_cursor() { echo -ne "\e[4 q"; }
@@ -32,12 +50,17 @@ autoload -Uz compinit
 compinit -i
 
 # --- 5. Aliases: Navigation ---
-alias z='cd'
-alias c='cd ~/loonix/.config'
-alias l='cd ~/loonix'
-alias s='cd ~/loonix/.config/scripts'
+alias ,='clear'
 alias ..='cd ..'
 alias ...='cd ../..'
+alias c='cd ~/loonix/.config'
+alias l='cd ~/loonix'
+alias ltlg='cd ~/loonix/tools/loonix-gui'
+alias ltll='cd ~/loonix/tools/loonix-login'
+alias s='cd ~/loonix/.config/scripts'
+alias t='cd ~/loonix/tools'
+#alias z='cd'
+
 
 # --- 6. Aliases: Hyprland Configs (Target: Loonix Folder) ---
 alias chypr='micro ~/loonix/.config/hypr/hyprland.conf'
@@ -77,6 +100,9 @@ mkd() { mkdir -p "$@" && cd "$_"; }
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
+# --- 11. Custom Functions ---
+
 # =========================================================
+eval "$(zoxide init zsh)"
 #  END OF CONFIG
 # =========================================================

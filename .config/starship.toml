@@ -1,0 +1,25 @@
+add_newline = false
+
+format = """[$username@$hostname](bold blue) | $directory[>](bold green)
+$character"""
+
+[username]
+show_always = true
+style_user = "bold blue"
+format = "[$user]($style)"
+
+[hostname]
+ssh_only = false
+style = "bold blue"
+format = "[$hostname]($style)"
+
+[directory]
+truncation_length = 0
+home_symbol = "󰋜 "
+style = "bold cyan"
+format = "[$path]($style) | "
+
+[character]
+# Pake Zero Width Space biar baris 2 muncul tapi kursor tetep di pojok kiri
+success_symbol = "​"
+error_symbol = "​"
